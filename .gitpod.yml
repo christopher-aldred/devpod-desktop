@@ -9,6 +9,6 @@ tasks:
     command: sleep 2 && chromium --incognito --start-fullscreen --simulate-outdated-no-au='Tue, 31 Dec 2099 23:59:59 GMT' https://docs.linuxserver.io &> /dev/null
   
   - name: Welcome message
-    command: sleep 4 && clear && printf "Hello Developer \(^o^)/" && echo ""
+    command: sleep 4 && clear && echo "Hello Developer \(^o^)/" && echo " " && echo " "
 
  # "openChrome": "xdg-open https://6080-$(hostname).ws-eu116.gitpod.io"
