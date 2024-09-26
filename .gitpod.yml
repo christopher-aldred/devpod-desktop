@@ -7,7 +7,7 @@ ports:
     onOpen: ignore
     
 tasks:
-  - before:  echo "alias vnc='xdg-open https://6080-$(hostname).ws-eu116.gitpod.io'" >> ~/.bashrc
+  - command:  echo "alias vnc='xdg-open https://6080-$(hostname).ws-eu116.gitpod.io'" >> ~/.bashrc
   
   - name: Start chrome
     command: sleep 2 && chromium --incognito --start-fullscreen --simulate-outdated-no-au='Tue, 31 Dec 2099 23:59:59 GMT' https://gifdb.com/images/high/borat-very-nice-funny-forced-smile-hk994tn7eahm7yrk.webp
