@@ -6,7 +6,7 @@ ports:
     onOpen: open-preview
 tasks:
   - name: Start chrome
-    command: chromium --start-fullscreen --simulate-outdated-no-au='Tue, 31 Dec 2099 23:59:59 GMT' --hide-crash-restore-bubble https://www.google.com &> /dev/null
+    command: sleep 3 && chromium --start-fullscreen --simulate-outdated-no-au='Tue, 31 Dec 2099 23:59:59 GMT' --hide-crash-restore-bubble https://www.google.com &> /dev/null
   
   - name: Welcome
-    command: sleep 1 && echo "Hello Developer :D"
+    command: sleep 5 && echo "Hello Developer :D"
