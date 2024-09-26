@@ -1,9 +1,12 @@
-image: gitpod/workspace-full-vnc:latest
+image:
+    file: .gitpod.Dockerfile
+    
 ports:
   - port: 5900
     onOpen: ignore
   - port: 6080
     onOpen: ignore
+    
 tasks:
   - name: Setup alias
     init: echo "alias vnc='xdg-open https://6080-$(hostname).ws-eu116.gitpod.io'" >> ~/.bashrc
