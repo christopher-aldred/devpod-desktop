@@ -1,44 +1,11 @@
-FROM ghcr.io/linuxserver/baseimage-kasmvnc:alpine319
+FROM ghcr.io/linuxserver/baseimage-kasmvnc:alpine318
 
-# set version label
-ARG BUILD_DATE
-ARG VERSION
-ARG XFCE_VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="thelamer"
+USER root
 
-# title
-ENV TITLE="Alpine XFCE"
-
-RUN \
-  echo "**** add icon ****" && \
-  curl -o \
-    /kclient/public/icon.png \
-    https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/webtop-logo.png && \
-  echo "**** install packages ****" && \
-  apk add --no-cache \
-    faenza-icon-theme \
-    faenza-icon-theme-xfce4-appfinder \
-    faenza-icon-theme-xfce4-panel \
-    firefox \
-    mousepad \
-    ristretto \
-    thunar \
-    util-linux-misc \
-    xfce4 \
-    xfce4-terminal && \
-  echo "**** cleanup ****" && \
-  rm -f \
-    /etc/xdg/autostart/xfce4-power-manager.desktop \
-    /etc/xdg/autostart/xscreensaver.desktop \
-    /usr/share/xfce4/panel/plugins/power-manager-plugin.desktop && \
-  rm -rf \
-    /config/.cache \
-    /tmp/*
-
+RUN addgroup --gid 33333 gitpod && adduser -h /home/gitpod -u 33333 -G gitpod -D gitpod
+RUN apk add openssh exa bash git
 RUN apk add --no-cache git
+RUN apk add --no-cache firefox
 
-# ports and volumes
-EXPOSE 3000
-
-VOLUME /config
+mkdir -p root/defaults
+echo "firefox" > root/defaults/autostart
