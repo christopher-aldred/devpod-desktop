@@ -36,6 +36,8 @@ RUN \
     /config/.cache \
     /tmp/*
 
+RUN apk add --no-cache git
+
 # ports and volumes
 EXPOSE 3000
 
