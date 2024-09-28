@@ -5,6 +5,8 @@ ports:
     onOpen: ignore
   - port: 6080
     onOpen: ignore
+  - port: 3000
+    onOpen: ignore
     
 tasks:
   - name: Create alias
