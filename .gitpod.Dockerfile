@@ -29,3 +29,6 @@ RUN chown -R $GITPOD_UID_GID:$GITPOD_UID_GID $GITPOD_HOME
 RUN rm -rf /root
 RUN mkdir -p /root
 RUN touch /root/dontremove
+
+RUN addgroup -g 33333 gitpod && \
+    adduser -G gitpod -u 33333 -s /bin/bash -D gitpod
