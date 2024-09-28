@@ -5,6 +5,11 @@ ENV HOME=/home/gitpod
 WORKDIR $HOME
 
 RUN apk add --no-cache git
+RUN apk add \
+    iptables \
+    gcompat \
+    libstdc++ \
+    libgcc
 RUN { echo && echo "PS1='\[\e]0;\u \w\a\]\[\033[01;32m\]\u\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\] \\\$ '" ; } >> .bashrc
 
 RUN addgroup -g 33333 gitpod && \
