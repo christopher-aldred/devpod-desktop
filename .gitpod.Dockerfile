@@ -11,11 +11,4 @@ RUN apk add \
     gcompat \
     libstdc++ \
     libgcc
-
-RUN apk add openssh exa bash git
-RUN apk add --no-cache git
-RUN apk add --no-cache firefox
-RUN mkdir -p root/defaults
-RUN echo "firefox" > root/defaults/autostart
-
 USER gitpod
