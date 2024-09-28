@@ -6,8 +6,10 @@ WORKDIR $HOME
 
 RUN apk add --no-cache git
 RUN { echo && echo "PS1='\[\e]0;\u \w\a\]\[\033[01;32m\]\u\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\] \\\$ '" ; } >> .bashrc
-RUN addgroup gitpod && \
-    adduser -G gitpod -s /bin/bash -D gitpod
+
+RUN addgroup -g 33333 gitpod && \
+    adduser -G gitpod -u 33333 -s /bin/bash -D gitpod
+
 RUN chmod g+rw /home && \
     mkdir -p /workspace && \
     chown -R gitpod:gitpod /home/gitpod && \
@@ -29,6 +31,3 @@ RUN chown -R $GITPOD_UID_GID:$GITPOD_UID_GID $GITPOD_HOME
 RUN rm -rf /root
 RUN mkdir -p /root
 RUN touch /root/dontremove
-
-RUN addgroup -g 33333 gitpod && \
-    adduser -G gitpod -u 33333 -s /bin/bash -D gitpod
