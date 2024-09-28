@@ -6,7 +6,7 @@ ports:
   - port: 6080
     onOpen: ignore
   - port: 3000
-    onOpen: ignore
+    onOpen: open-preview
   - port: 3001
     onOpen: ignore
 
