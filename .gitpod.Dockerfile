@@ -1,17 +1,33 @@
-FROM gitpod/workspace-full:latest
+FROM ghcr.io/linuxserver/baseimage-kasmvnc:alpine320
+COPY /root /
 
+ENV HOME=/home/gitpod
+WORKDIR $HOME
+
+RUN addgroup -g 33333 gitpod && \
+    adduser -G gitpod -u 33333 -s /bin/bash -D gitpod
+
+RUN { echo && echo "PS1='\[\e]0;\u \w\a\]\[\033[01;32m\]\u\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\] \\\$ '" ; } >> .bashrc
+RUN addgroup gitpod && \
+    adduser -G gitpod -s /bin/bash -D gitpod
+RUN chmod g+rw /home && \
+    mkdir -p /workspace && \
+    chown -R gitpod:gitpod /home/gitpod && \
+    chown -R gitpod:gitpod /workspace;
+ENV SHELL /bin/bash
+ENV USE_LOCAL_GIT true
+
+# Give control to gitpod
 USER root
 
-RUN apt-get update \
-    && apt-get install -yq xvfb x11vnc xterm \
-    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
+# Gitpod configuration
+ENV GITPOD_HOME /home/gitpod
+ENV GITPOD_UID_GID 33333
 
-RUN wget https://github.com/kasmtech/KasmVNC/releases/download/v1.3.2/kasmvncserver_bookworm_1.3.2_amd64.deb
+# Keep the stemn user configuration
+RUN chown -R $GITPOD_UID_GID:$GITPOD_UID_GID $GITPOD_HOME
 
-RUN apt-get install ./kasmvncserver_*.deb
-
-RUN addgroup $USER ssl-cert
-
-RUN vncserver
-
-RUN tail -f ~/.vnc/*.log
+# Remove root user config that gitpod copies over
+RUN rm -rf /root
+RUN mkdir -p /root
+RUN touch /root/dontremove
