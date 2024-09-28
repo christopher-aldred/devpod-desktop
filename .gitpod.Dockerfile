@@ -1,19 +1,45 @@
-FROM ghcr.io/linuxserver/baseimage-kasmvnc:debianbullseye
+FROM ghcr.io/linuxserver/baseimage-kasmvnc:alpine319
 
-# Update and install extra packages.
-RUN echo "**** install packages ****" && \
-    apt-get update && \
-    apt-get install -y --no-install-recommends curl libgtk-3-0 libnotify4 libatspi2.0-0 libsecret-1-0 libnss3 desktop-file-utils && \
-    apt-get autoclean && rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
+# set version label
+ARG BUILD_DATE
+ARG VERSION
+ARG XFCE_VERSION
+LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+LABEL maintainer="thelamer"
 
-# Environment variables
-ENV CUSTOM_PORT="8080" \
-    CUSTOM_HTTPS_PORT="8443" \
-    CUSTOM_USER="" \
-    PASSWORD="" \
-    SUBFOLDER="" \
-    TITLE="TEST" \
-    FM_HOME="/vaults"
+# title
+ENV TITLE="Alpine XFCE"
 
-EXPOSE 8080 8443
-VOLUME ["/config","/vaults"]
+RUN \
+  echo "**** add icon ****" && \
+  curl -o \
+    /kclient/public/icon.png \
+    https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/webtop-logo.png && \
+  echo "**** install packages ****" && \
+  apk add --no-cache \
+    faenza-icon-theme \
+    faenza-icon-theme-xfce4-appfinder \
+    faenza-icon-theme-xfce4-panel \
+    firefox \
+    mousepad \
+    ristretto \
+    thunar \
+    util-linux-misc \
+    xfce4 \
+    xfce4-terminal && \
+  echo "**** cleanup ****" && \
+  rm -f \
+    /etc/xdg/autostart/xfce4-power-manager.desktop \
+    /etc/xdg/autostart/xscreensaver.desktop \
+    /usr/share/xfce4/panel/plugins/power-manager-plugin.desktop && \
+  rm -rf \
+    /config/.cache \
+    /tmp/*
+
+# add local files
+COPY /root /
+
+# ports and volumes
+EXPOSE 3000
+
+VOLUME /config
