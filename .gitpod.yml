@@ -24,7 +24,7 @@ tasks:
       source ~/.bashrc && \
       clear && echo "Hello Developer \(^o^)/" && \
       echo " " && \
-      echo "Starting VNC desktop..." && \
+      echo "Starting VNC desktop (first time can take a few minutes)" && \
       echo " " && \
       sleep 3 && \
       sh startVNC.sh && \
