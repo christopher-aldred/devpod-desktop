@@ -18,11 +18,21 @@ ports:
 
 tasks:
   - init: |
-      sh initVNC.sh
+      sh initVNC.sh && clear
+
   - command: |
-      sh startVNC.sh
-  - command: echo "alias vnc='gp preview --external https://6901-$(hostname).ws-eu116.gitpod.io'" >> ~/.bashrc
-  - command: sleep 5 && source ~/.bashrc && clear && echo "Hello Developer \(^o^)/" && echo " " echo "Type 'vnc' and hit enter to open your virtual desktop" && echo " "
+      sh startVNC.sh && \
+      echo " " && \
+      source ~/.bashrc && \
+      echo "Type 'vnc' and hit enter to open your virtual desktop" && \
+      echo " "
+  
+  - command: |
+      echo "alias vnc='gp preview --external https://6901-$(hostname).ws-eu116.gitpod.io'" >> ~/.bashrc
+  
+  - command: |
+      sleep 5 && source ~/.bashrc && \
+      clear && echo "Hello Developer \(^o^)/"
     
 # tasks:
 #   - name: Create alias
