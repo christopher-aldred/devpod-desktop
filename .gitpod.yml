@@ -17,7 +17,7 @@ ports:
     onOpen: ignore
 
 tasks:
-  - init: sh startVNC.sh
+  - init: sh .gitpod.vnc.sh
     command: |
       echo "alias vnc='gp preview --external https://6901-$(hostname).ws-eu116.gitpod.io'" >> ~/.bashrc && \
       source ~/.bashrc && \
