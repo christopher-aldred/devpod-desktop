@@ -19,8 +19,6 @@ ports:
 tasks:
   - name: Starting VNC
     init:  sh .gitpod.vnc.sh
-    command: |
-      gp preview --external https://6901-$(hostname).ws-eu116.gitpod.io && sleep 3 && exit
 
   - name: Welcome
     command: |
