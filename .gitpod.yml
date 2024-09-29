@@ -5,7 +5,7 @@ ports:
     onOpen: ignore
   - port: 6080
     onOpen: ignore
-  - port: 6901
+  - port: 6900
     onOpen: ignore
   - port: 3001
     onOpen: ignore
@@ -16,9 +16,9 @@ ports:
 
 tasks:
   - init: |
-      . initVNC.sh
+      sh initVNC.sh
   - command: |
-      . startVNC.sh
+      sh startVNC.sh
   - name: Create alias
     command:  echo "alias vnc='xdg-open https://3000-$(hostname).ws-eu116.gitpod.io'" >> ~/.bashrc && source ~/.bashrc
     

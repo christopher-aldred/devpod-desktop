@@ -1,10 +1,5 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-sudo mkdir ~/docker/webtop/config -p
+mkdir ~/docker/webtop/config -p
 
-sudo echo "PASSWORD=Password_0" > ~/docker/webtop/.env
-
-sudo chown "$USER":"$USER" /home/"$USER"/docker -R
-
-sudo chmod g+rwx "$HOME/docker" -R
-
+echo "PASSWORD=Password_0" > ~/docker/webtop/.env
