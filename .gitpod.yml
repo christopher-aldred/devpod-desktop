@@ -6,17 +6,21 @@ ports:
   - port: 6080
     onOpen: ignore
   - port: 6901
-    onOpen: open-preview
+    onOpen: ignore
   - port: 3001
     onOpen: ignore
+  - port: 3000
+    onOpen: ignore
+  - port: 80
+    onOpen: ignore
 
-# tasks:
-#   - init: |
-#       docker-compose pull
-#   - command: |
-#       docker-compose up
-#   - name: Create alias
-#     command:  echo "alias vnc='xdg-open https://3000-$(hostname).ws-eu116.gitpod.io'" >> ~/.bashrc
+tasks:
+  - init: |
+      . initVNC.sh
+  - command: |
+      . startVNC.sh
+  - name: Create alias
+    command:  echo "alias vnc='xdg-open https://3000-$(hostname).ws-eu116.gitpod.io'" >> ~/.bashrc && source ~/.bashrc
     
 # tasks:
 #   - name: Create alias
