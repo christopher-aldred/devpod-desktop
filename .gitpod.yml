@@ -18,8 +18,7 @@ ports:
 
 tasks:
   - init: sh .gitpod.vnc.sh > /dev/null 2>&1
-    command: |
-      sleep 5 &
+  - command: |
       echo "alias vnc='gp preview --external https://6901-$(hostname).ws-eu116.gitpod.io'" >> ~/.bashrc && \
       source ~/.bashrc && \
       clear && \
