@@ -7,6 +7,8 @@ ports:
     onOpen: ignore
   - port: 6900
     onOpen: ignore
+  - port: 6901
+    onOpen: ignore
   - port: 3001
     onOpen: ignore
   - port: 3000
@@ -19,8 +21,8 @@ tasks:
       sh initVNC.sh
   - command: |
       sh startVNC.sh
-  - name: Create alias
-    command:  echo "alias vnc='xdg-open https://3000-$(hostname).ws-eu116.gitpod.io'" >> ~/.bashrc && source ~/.bashrc
+  - command: echo "alias vnc='gp preview --external https://6901-$(hostname).ws-eu116.gitpod.io'" >> ~/.bashrc
+  - command: sleep 5 && source ~/.bashrc && clear && echo "Hello Developer \(^o^)/" && echo " " echo "Type 'vnc' and hit enter to open your virtual desktop" && echo " "
     
 # tasks:
 #   - name: Create alias
