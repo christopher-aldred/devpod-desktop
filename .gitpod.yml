@@ -18,7 +18,7 @@ ports:
 
 tasks:
   - name: Starting VNC
-    init:  sh .gitpod.vnc.sh && exit
+    init:  sh .gitpod.vnc.sh && sleep 5 && exit
 
   - name: Welcome
     command: |
